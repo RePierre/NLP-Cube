@@ -41,13 +41,18 @@ RUN mkdir /work && \
     cd /work && \
     git clone https://github.com/adobe/NLP-Cube.git
 
+# Prepare notebook
+RUN pip3 install jupyter
+
+
 # Copy EUROLAN notebook into work dir
 ARG extranotebook
 ARG extranotebookname
 COPY $extranotebook /work/NLP-Cube/examples/${extranotebookname}.ipynb
 
-# Prepare notebook
-RUN pip3 install jupyter
+# Copy data
+ARG datadir=data
+COPY $datadir /
 
 # Start notebook
 CMD cd /work/NLP-Cube/ && python3 -m "notebook" --allow-root --ip=0.0.0.0 --no-browser
