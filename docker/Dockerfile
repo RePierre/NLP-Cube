@@ -57,6 +57,16 @@ COPY $datadir /data
 # Copy utility scripts
 COPY utils /work/utils
 
+# Install JRE for CONNLU converter
+RUN apt-get install -y --no-install-recommends software-properties-common && \
+    add-apt-repository -y ppa:openjdk-r/ppa && \
+    apt-get update && \
+    apt-get install -y openjdk-8-jre && \
+    update-alternatives --config java
+
+# Copy Annotator2CONNLU transformer
+ARG connlutransformer=utils/bin/TreeBankAnnotatorToConllU.jar
+COPY $connlutransformer /work/bin/
 
 # Start notebook
 CMD cd /work/NLP-Cube/ && python3 -m "notebook" --allow-root --ip=0.0.0.0 --no-browser
