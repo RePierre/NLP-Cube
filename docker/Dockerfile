@@ -52,10 +52,11 @@ COPY $extranotebook /work/NLP-Cube/examples/${extranotebookname}.ipynb
 
 # Copy data
 ARG datadir=data
-COPY $datadir /
+COPY $datadir /data
 
 # Copy utility scripts
-COPY utils /work/
+COPY utils /work/utils
+
 
 # Start notebook
 CMD cd /work/NLP-Cube/ && python3 -m "notebook" --allow-root --ip=0.0.0.0 --no-browser
