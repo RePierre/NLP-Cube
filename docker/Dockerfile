@@ -53,6 +53,12 @@ COPY $extranotebook /work/NLP-Cube/examples/${extranotebookname}.ipynb
 # Copy utility scripts
 COPY utils /work/utils
 
+# Clone corpus validator tools
+RUN mkdir /work/utils/ud-tools && \
+    cd /work/utils/ud-tools && \
+    git clone https://github.com/UniversalDependencies/tools.git && \
+    pip3 install regex
+
 # Install JRE for CONNLU converter
 RUN apt-get update && \
     apt-get upgrade -y && \
