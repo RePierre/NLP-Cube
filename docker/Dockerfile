@@ -50,10 +50,6 @@ ARG extranotebook
 ARG extranotebookname
 COPY $extranotebook /work/NLP-Cube/examples/${extranotebookname}.ipynb
 
-# Copy data
-ARG datadir=data
-COPY $datadir /data
-
 # Copy utility scripts
 COPY utils /work/utils
 
