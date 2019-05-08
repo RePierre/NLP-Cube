@@ -54,9 +54,12 @@ COPY $extranotebook /work/NLP-Cube/examples/${extranotebookname}.ipynb
 COPY utils /work/utils
 
 # Install JRE for CONNLU converter
-RUN apt-get install -y --no-install-recommends software-properties-common && \
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends software-properties-common && \
     add-apt-repository -y ppa:openjdk-r/ppa && \
     apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y openjdk-8-jre && \
     update-alternatives --config java
 
